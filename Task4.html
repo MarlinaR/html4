@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <!-- Тег meta для указания кодировки -->
+        <meta charset="utf-8">
+        <script>
+            function Count() {
+                var a = document.getElementById('a').value;
+                var h = document.getElementById('h').value;
+                if ((a < 0) || (h < 0)) {
+                    alert("Некорректный ввод");
+                } else {
+                    if ((a == 0) || (h == 0)) {
+                        alert("Некорректный ввод");
+                    } else {
+                        if ((a > 0) || (h > 0)) {
+                            console.log('Площадь треугольника: ' + (a * (h / 2)));
+
+                        }
+                    }
+                }
+            }
+            function task2() {
+                var c = document.getElementById('c').value;
+                if (isNaN(c) || c >= 1) {
+                    alert("Некорректный ввод");
+                } else {
+                    var sum = 0;
+                    var d = c * c / 2;
+                    var div = 2;
+                    while (d >= 0.0005) {
+                        sum += d;
+                        div += 4;
+                        d = c * c / div;
+                    }
+                    console.log("Сумма последовательности: ");
+                    console.log(sum);
+                }
+            }
+            function randomInteger(min, max) {
+                var rand = min - 0.5 + Math.random() * (max - min + 1)
+                rand = Math.round(rand);
+                return rand;
+            }
+            function Mata() {
+                var x = 0;
+                var y = 0;
+                var t = 0;
+                var arr = new Array();
+                for (i = 0; i < 7; i++) {
+                    arr[i] = new Array();
+                    for (j = 0; j < 9; j++) {
+                        arr[i][j] = randomInteger(1, 100);
+                        if (arr[i][j] > t) {
+                            x = i;
+                            y = j;
+                            t = arr[i][j];
+                        }
+                    }
+                }
+                console.log(arr);
+                t = arr[0][0];
+                arr[0][0] = arr[x][y];
+                arr[x][y] = t;
+                for (i = 0; i < 7; i++) {
+                    console.log(arr[i]);
+                }
+            }
+
+            function getRandomInt(min,max) {
+                return (min - 0.5 + Math.random()*(max - min));
+            }
+            function compareNumeric(a, b) {
+                return a - b;
+            }
+            function GetResultArray(a){
+                a.sort(compareNumeric);
+                return(a)
+            }
+
+            function getResultMatrix(){
+                var n = document.getElementById('n').value;
+                a = GetArray().reverse();
+                a = GetResultArray(a);
+                var matrix = []
+                n = Math.floor(n)
+                var matrix = []
+                for (i = 0; i < n; i++){
+                    var arr = []
+                    if (i % 2 == 0){
+                        for (j = n-1; j > -1; j--){
+                            arr.push(a[n*i+j]);
+                        }
+                    } else {
+                        for (j = 0; j < n; j++){
+                            arr.push(a[n*i+j]);
+                        }
+                    }
+                    matrix.push(arr);
+                }
+
+                var body = document.getElementById('table');
+                var tbl = document.createElement('table');
+                tbl.style.width = '100%';
+                tbl.setAttribute('border', '1');
+                var tbdy = document.createElement('tbody');
+                for (var i = 0; i < n; i++) {
+                    var tr = document.createElement('tr');
+                    for (var j = 0; j < n; j++) {
+                        var td = document.createElement('td');
+                        td.appendChild(document.createTextNode(matrix[i][j]))
+                        tr.appendChild(td)
+                    }
+                    tbdy.appendChild(tr);
+                }
+                tbl.appendChild(tbdy);
+                tbl.setAttribute('border', '3');
+                tbl.setAttribute('class', 'table');
+                tbl.setAttribute('class', 'table-dark');
+                body.appendChild(tbl)
+            }
+
+            function GetArray(){
+                var max = document.getElementById('max').value;
+                var min = document.getElementById('min').value;
+                var n = document.getElementById('n').value;
+                var arr = new Array();
+                var i = 0;
+                var j = 0;
+                n = n*n;
+                for (i = 0; i < n; i++) {
+                        arr[i] = randomInteger(min, max);
+                        }
+                    
+                return arr
+                }
+          	
+        </script>
+    </head>
+    <body>
+        <form>
+            Длина основания (a):<input id="a" type="number">
+            <br>
+            Длина высоты (h):<input id="h" type="number">
+            <br>
+        </form>
+        <button onClick="Count()">Результат</button>
+        <br>
+        <br>
+        <form>
+            Введите число (c):<input id="c" type="number">
+            <br>
+        </form>
+        <button onClick="task2()">Результат</button>
+        <br>
+        <br>
+        <form>Построить матрицу : 
+	
+        </form>
+        <button onClick="Mata()">Результат</button>
+   
+
+	   <form >	
+            Введите min <input id="min" type="number"  ><br><br> 
+            Введите max <input id="max" type="number"  ><br><br> 
+            Введите n <input  id="n" type="number" ><br><br>
+       </form>
+    <button onClick="getResultMatrix(document.getElementById('min').value)"> Вычислить</button>
+    <br><br>
+    <div id='table'></div>
+
+    
+  </body>
+    
+</html>
